@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sai Prabhat C A — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --border: rgba(255,255,255,0.07);
+    --accent: #d4ff47;
+    --text: #f0f0f0;
+    --muted: #666;
+    --tag-bg: #1a1a1a;
+    --side-pad: clamp(1rem, 5vw, 5rem);
+    --content-max: 860px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: clamp(13px, 1.4vw, 15px);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem var(--side-pad);
+    background: rgba(10,10,10,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1rem, 2vw, 1.2rem); letter-spacing: -0.5px; }
+  .logo span { color: var(--accent); }
+
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text); transition: all 0.3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .nav-links { display: flex; gap: clamp(1rem, 3vw, 2.5rem); list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: clamp(10px, 1.1vw, 12px); letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* SECTION WRAPPER — content right-aligned on desktop */
+  .page-section {
+    width: 100%;
+    padding: clamp(3rem, 8vw, 7rem) var(--side-pad);
+    border-bottom: 1px solid var(--border);
+  }
+  .inner {
+    max-width: var(--content-max);
+    margin-left: 0;
+    margin-right: auto;
+    width: 100%;
+  }
+
+  .section-label { font-size: clamp(10px, 1vw, 11px); letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+  h2 { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; line-height: 1.1; margin-bottom: 2.5rem; }
+
+  /* HERO */
+  #hero { min-height: 93vh; display: flex; flex-direction: column; justify-content: center; }
+  .hero-eyebrow { font-size: clamp(10px, 1vw, 11px); letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
+  .hero-name { font-family: 'Syne', sans-serif; font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 800; line-height: 1.0; letter-spacing: -2px; margin-bottom: 1.2rem; }
+  .hero-name em { font-style: normal; color: var(--accent); }
+  .hero-sub { font-size: clamp(13px, 1.5vw, 15px); color: var(--muted); max-width: 480px; margin-bottom: 2.5rem; line-height: 1.8; }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn-primary { padding: 0.7rem 1.6rem; background: var(--accent); color: #0a0a0a; font-family: 'DM Mono', monospace; font-size: clamp(11px, 1.1vw, 12px); letter-spacing: 0.06em; border: none; cursor: pointer; transition: opacity 0.2s; text-decoration: none; display: inline-block; }
+  .btn-primary:hover { opacity: 0.82; }
+  .btn-outline { padding: 0.7rem 1.6rem; background: transparent; color: var(--text); font-family: 'DM Mono', monospace; font-size: clamp(11px, 1.1vw, 12px); letter-spacing: 0.06em; border: 1px solid var(--border); cursor: pointer; transition: border-color 0.2s, color 0.2s; text-decoration: none; display: inline-block; }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-disabled { opacity: 0.55; cursor: default; }
+
+  .hero-scroll { margin-top: 3.5rem; display: flex; align-items: center; gap: 0.8rem; font-size: 10px; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; }
+  .scroll-line { width: 36px; height: 1px; background: var(--muted); }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+  .about-text p { color: var(--muted); margin-bottom: 1rem; }
+  .about-text p strong { color: var(--text); font-weight: 400; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .stat-card { padding: clamp(1rem, 2vw, 1.5rem); border: 1px solid var(--border); background: var(--surface); }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700; color: var(--accent); }
+  .stat-label { font-size: 10px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.3rem; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(0.8rem, 2vw, 1.5rem); }
+  .skill-group { padding: clamp(1rem, 2vw, 1.5rem); border: 1px solid var(--border); background: var(--surface); transition: border-color 0.2s; }
+  .skill-group:hover { border-color: rgba(212,255,71,0.3); }
+  .skill-group-title { font-family: 'Syne', sans-serif; font-size: clamp(0.75rem, 1.2vw, 0.88rem); font-weight: 600; margin-bottom: 1rem; color: var(--text); }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag { padding: 0.25rem 0.65rem; background: var(--tag-bg); border: 1px solid var(--border); font-size: clamp(10px, 0.9vw, 11px); color: var(--muted); letter-spacing: 0.04em; }
+
+  /* PROJECTS */
+  .projects-list { display: flex; flex-direction: column; }
+  .project-row { display: grid; grid-template-columns: 60px 1fr auto; align-items: center; gap: clamp(1rem, 3vw, 2rem); padding: 1.6rem 0; border-bottom: 1px solid var(--border); transition: background 0.15s, padding 0.2s; cursor: pointer; }
+  .project-row:first-child { border-top: 1px solid var(--border); }
+  .project-row:hover { background: var(--surface); padding-left: 1rem; padding-right: 1rem; margin: 0 -1rem; }
+  .project-num { font-size: 10px; color: var(--muted); letter-spacing: 0.1em; }
+  .project-name { font-family: 'Syne', sans-serif; font-size: clamp(0.95rem, 1.6vw, 1.1rem); font-weight: 600; }
+  .project-desc { font-size: clamp(11px, 1vw, 12px); color: var(--muted); margin-top: 0.3rem; }
+  .project-tech { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: flex-end; }
+  .project-tech span { font-size: 10px; padding: 0.2rem 0.55rem; border: 1px solid var(--border); color: var(--muted); letter-spacing: 0.05em; }
+  .project-sub-links { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.6rem; }
+  .sub-link { font-size: 10px; color: var(--accent); text-decoration: none; letter-spacing: 0.06em; opacity: 0.8; transition: opacity 0.2s; }
+  .sub-link:hover { opacity: 1; text-decoration: underline; }
+
+  /* EDUCATION */
+  .edu-list { display: flex; flex-direction: column; gap: 1.2rem; }
+  .edu-card { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 1.2rem; padding: clamp(1.2rem, 2vw, 1.8rem); border: 1px solid var(--border); background: var(--surface); transition: border-color 0.2s; }
+  .edu-card:hover { border-color: rgba(212,255,71,0.3); }
+  .edu-degree { font-family: 'Syne', sans-serif; font-size: clamp(0.88rem, 1.4vw, 1rem); font-weight: 600; margin-bottom: 0.3rem; }
+  .edu-school { font-size: clamp(11px, 1.1vw, 13px); color: var(--muted); margin-bottom: 0.4rem; }
+  .edu-desc { font-size: clamp(10px, 1vw, 12px); color: var(--muted); }
+  .edu-year { font-size: 10px; padding: 0.3rem 0.75rem; border: 1px solid var(--border); color: var(--accent); letter-spacing: 0.08em; white-space: nowrap; height: fit-content; }
+
+  /* CONTACT */
+  .contact-inner { border: 1px solid var(--border); padding: clamp(1.5rem, 4vw, 3rem); background: var(--surface); }
+  .contact-heading { font-family: 'Syne', sans-serif; font-size: clamp(1.5rem, 3.5vw, 2.2rem); font-weight: 700; margin-bottom: 0.5rem; }
+  .contact-sub { color: var(--muted); font-size: clamp(11px, 1.1vw, 13px); margin-bottom: 2rem; }
+  .contact-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .contact-link { display: flex; align-items: center; gap: 0.6rem; padding: 0.65rem 1.3rem; border: 1px solid var(--border); color: var(--text); text-decoration: none; font-size: clamp(11px, 1.1vw, 12px); letter-spacing: 0.06em; transition: border-color 0.2s, color 0.2s; font-family: 'DM Mono', monospace; }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+  .contact-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+  /* FOOTER */
+  footer {
+    padding: 1.8rem var(--side-pad);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+
+  /* RESPONSIVE */
+  @media (min-width: 1400px) { :root { --content-max: 1000px; } }
+  @media (max-width: 1100px) { :root { --content-max: 720px; } }
+
+  /* Tablet portrait — keep left, just stack columns */
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* Large phone / small tablet */
+  @media (max-width: 600px) {
+    :root { --side-pad: 1.2rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .project-row { grid-template-columns: 44px 1fr; }
+    .project-tech { display: none; }
+    .edu-card { grid-template-columns: 1fr; }
+    .edu-year { width: fit-content; }
+    .contact-links { flex-direction: column; }
+    footer { flex-direction: column; gap: 0.4rem; text-align: center; }
+  }
+
+  /* Small phone */
+  @media (max-width: 380px) {
+    .hero-name { letter-spacing: -1px; }
+    .hero-ctas { flex-direction: column; }
+    .btn-primary, .btn-outline { text-align: center; width: 100%; }
+    .about-stats { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+  }
+
+  /* Mobile nav hamburger */
+  @media (max-width: 520px) {
+    .hamburger { display: flex; }
+    .nav-links {
+      display: none; position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; gap: 0;
+      background: rgba(10,10,10,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 0;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li a { display: block; padding: 0.8rem var(--side-pad); font-size: 12px; border-bottom: 1px solid var(--border); }
+    .nav-links li:last-child a { border-bottom: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">SP<span>.</span></div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about" onclick="closeMenu()">About</a></li>
+    <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+    <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+    <li><a href="#education" onclick="closeMenu()">Education</a></li>
+    <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="page-section" id="hero">
+  <div class="inner">
+    <p class="hero-eyebrow">✦ Available for internships &amp; collaborations</p>
+    <h1 class="hero-name">Sai Prabhat<br/><em>C A</em></h1>
+    <p class="hero-sub">ECE student at Jain University &amp; aspiring Embedded Systems Engineer, and a business enthusiast.</p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View Projects →</a>
+      <a href="#" class="btn-outline btn-disabled" title="Coming soon" onclick="event.preventDefault()">Download CV</a>
+    </div>
+    <div class="hero-scroll">
+      <span class="scroll-line"></span>
+      scroll to explore
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="page-section" id="about">
+  <div class="inner">
+    <p class="section-label">// about me</p>
+    <h2>A bit about<br/>who I am</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Hey! I'm <strong>Sai Prabhat C A</strong>, an Electronics &amp; Communication Engineering student at <strong>Jain University, Bengaluru</strong> — passionate about building at the intersection of hardware and software.</p>
+        <p>Beginning focused preparation for GATE 2028.</p>
+        <p>I'm currently in <strong>4th semester</strong> of my B.Tech degree.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Projects Built</div></div>
+        <div class="stat-card"><div class="stat-num">2</div><div class="stat-label">Hackathons</div></div>
+        <div class="stat-card"><div class="stat-num">1</div><div class="stat-label">Internships</div></div>
+        <div class="stat-card"><div class="stat-num">6.7</div><div class="stat-label">CGPA</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="page-section" id="skills">
+  <div class="inner">
+    <p class="section-label">// skills</p>
+    <h2>What I<br/>work with</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-tags">
+          <span class="tag">Embedded C</span>
+          <span class="tag">C Language</span>
+          <span class="tag">Python</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Hardware</div>
+        <div class="skill-tags">
+          <span class="tag">Arduino</span>
+          <span class="tag">IC Chips</span>
+          <span class="tag">PIC18 Microcontroller</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="page-section" id="projects">
+  <div class="inner">
+    <p class="section-label">// projects</p>
+    <h2>Things I've<br/>built</h2>
+    <div class="projects-list">
+
+      <div class="project-row" onclick="window.location.href='project-section.html'">
+        <div class="project-num">01</div>
+        <div>
+          <div class="project-name">HTML / CSS Projects</div>
+          <div class="project-desc">Front-end interfaces &amp; layouts — Little Lemmon, Login Pages, Shopping Site &amp; more.</div>
+          <div class="project-sub-links" onclick="event.stopPropagation()">
+            <a href="https://saiprabhatca.github.io/Little-Leaf-Project-1/" target="_blank" class="sub-link">Little Lemmon ↗</a>
+            <a href="https://saiprabhatca.github.io/Login-pageLL-Project-1.2/" target="_blank" class="sub-link">Login Pages ↗</a>
+            <a href="https://saiprabhatca.github.io/Project-2-The-shopping-site/" target="_blank" class="sub-link">Shopping Site ↗</a>
+          </div>
+        </div>
+        <div class="project-tech"><span>HTML</span><span>CSS</span></div>
+      </div>
+
+      <div class="project-row" onclick="window.location.href='hardware-coming-soon.html'">
+        <div class="project-num">02</div>
+        <div>
+          <div class="project-name">Hardware Projects</div>
+          <div class="project-desc">Embedded and electronics projects combining hardware and software.</div>
+        </div>
+        <div class="project-tech"><span>ECE</span><span>Embedded</span></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- EDUCATION -->
+<div class="page-section" id="education">
+  <div class="inner">
+    <p class="section-label">// education</p>
+    <h2>Where I've<br/>been learning</h2>
+    <div class="edu-list">
+      <div class="edu-card">
+        <div>
+          <div class="edu-degree">B.Tech — Electronics &amp; Communication Engineering</div>
+          <div class="edu-school">Jain University · Bengaluru</div>
+          <div class="edu-desc">Current CGPA: 6.7 · Coursework: Signals &amp; Systems, VLSI, Embedded Systems, DSP, Communication Networks</div>
+        </div>
+        <div class="edu-year">2024 – 2028</div>
+      </div>
+      <div class="edu-card">
+        <div>
+          <div class="edu-degree">Class 12 — Science</div>
+          <div class="edu-school">Sri Chaitanya Collage· CBSE</div>
+          <div class="edu-desc">Percentage: 61%.</div>
+        </div>
+        <div class="edu-year">2021 – 2022</div>
+      </div>
+      <div class="edu-card">
+        <div>
+          <div class="edu-degree">Class 10</div>
+          <div class="edu-school">Sri Chaitanya techno school · CBSE</div>
+          <div class="edu-desc">Percentage: 75%.</div>
+        </div>
+        <div class="edu-year">2019 – 2020</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="page-section" id="contact" style="border-bottom:none;">
+  <div class="inner">
+    <p class="section-label">// contact</p>
+    <div class="contact-inner">
+      <p class="contact-heading">Let's build<br/>something.</p>
+      <p class="contact-sub">Open to internships, collaborations, and interesting conversations.</p>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:saiprabhat.ca@gmail.com"><span class="contact-dot"></span>Email</a>
+        <a class="contact-link" href="https://www.linkedin.com/in/saiprabhatca/" target="_blank"><span class="contact-dot"></span>LinkedIn</a>
+        <a class="contact-link" href="https://github.com/saiprabhatca" target="_blank"><span class="contact-dot"></span>GitHub</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 Sai Prabhat C A</span>
+  <span>Built with my own hardwork and AI ✦</span>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('navLinks');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+  }
+</script>
+
+</body>
+</html>
+

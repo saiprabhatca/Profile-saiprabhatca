@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>HTML/CSS Projects — Sai Prabhat C A</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --border: rgba(255,255,255,0.07);
+    --accent: #d4ff47;
+    --text: #f0f0f0;
+    --muted: #666;
+    --tag-bg: #1a1a1a;
+    --side-pad: clamp(1rem, 5vw, 5rem);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: clamp(13px, 1.4vw, 15px);
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem var(--side-pad);
+    background: rgba(10,10,10,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(1rem, 2vw, 1.1rem); letter-spacing: -0.5px; }
+  .logo span { color: var(--accent); }
+
+  .nav-links { display: flex; gap: clamp(1rem, 3vw, 2rem); list-style: none; align-items: center; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: clamp(10px, 1.1vw, 12px); letter-spacing: 0.08em;
+    text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links .back-btn {
+    padding: 0.45rem 1.1rem;
+    border: 1px solid var(--border);
+    color: var(--text); text-decoration: none;
+    font-size: clamp(10px, 1.1vw, 11px); letter-spacing: 0.08em;
+    text-transform: uppercase; transition: border-color 0.2s, color 0.2s;
+    font-family: 'DM Mono', monospace;
+  }
+  .nav-links .back-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── HERO HEADER ── */
+  .page-hero {
+    padding: clamp(3rem, 8vw, 6rem) var(--side-pad) clamp(2rem, 4vw, 3rem);
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-inner { max-width: 860px; margin-left: 0; }
+  .hero-label { font-size: clamp(10px, 1vw, 11px); letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 800; line-height: 1.0;
+    letter-spacing: -2px; margin-bottom: 1rem;
+  }
+  .hero-title em { font-style: normal; color: var(--accent); }
+  .hero-sub { color: var(--muted); max-width: 500px; font-size: clamp(12px, 1.3vw, 14px); }
+
+  /* ── PROJECTS GRID ── */
+  .projects-section {
+    padding: clamp(2.5rem, 6vw, 5rem) var(--side-pad);
+    flex: 1;
+  }
+  .projects-inner { max-width: 860px; margin-left: 0; }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1rem, 2.5vw, 1.8rem);
+    margin-bottom: 3rem;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    transition: border-color 0.2s, transform 0.2s;
+    overflow: hidden;
+  }
+  .project-card:hover {
+    border-color: rgba(212,255,71,0.35);
+    transform: translateY(-3px);
+  }
+
+  /* image area */
+  .card-img {
+    width: 100%; aspect-ratio: 16/9;
+    overflow: hidden; background: #0f0f0f;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card-img img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform 0.4s;
+  }
+  .project-card:hover .card-img img { transform: scale(1.04); }
+
+  /* placeholder if no image */
+  .card-img-placeholder {
+    width: 100%; aspect-ratio: 16/9;
+    background: #0f0f0f;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted);
+  }
+
+  .card-body { padding: clamp(1rem, 2vw, 1.4rem); flex: 1; display: flex; flex-direction: column; gap: 0.6rem; }
+
+  .card-num { font-size: 10px; color: var(--accent); letter-spacing: 0.12em; }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(0.85rem, 1.4vw, 1rem); font-weight: 600;
+    color: var(--text); line-height: 1.3;
+  }
+
+  .card-desc { font-size: clamp(10px, 0.95vw, 12px); color: var(--muted); line-height: 1.6; flex: 1; }
+
+  .card-tag {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    font-size: 10px; color: var(--muted); letter-spacing: 0.04em;
+    width: fit-content;
+  }
+
+  .card-links { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: auto; padding-top: 0.8rem; border-top: 1px solid var(--border); }
+  .card-link {
+    display: flex; align-items: center; gap: 0.4rem;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid var(--border);
+    color: var(--muted); text-decoration: none;
+    font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+    transition: border-color 0.2s, color 0.2s;
+    font-family: 'DM Mono', monospace;
+  }
+  .card-link:hover { border-color: var(--accent); color: var(--accent); }
+  .card-link.primary { border-color: rgba(212,255,71,0.3); color: var(--accent); }
+  .card-link.primary:hover { border-color: var(--accent); background: rgba(212,255,71,0.06); }
+
+  /* ── MORE COMING SOON ── */
+  .more-soon {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.4rem 1.6rem;
+    border: 1px dashed rgba(255,255,255,0.1);
+    color: var(--muted); font-size: 12px; letter-spacing: 0.06em;
+  }
+  .more-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 1.5rem var(--side-pad);
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 10px; color: var(--muted); letter-spacing: 0.06em;
+  }
+  .footer-tag { color: var(--accent); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 560px) {
+    :root { --side-pad: 1.2rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.4rem; text-align: center; }
+  }
+  @media (max-width: 400px) {
+    .hero-title { letter-spacing: -1px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">SP<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html" class="back-btn">← Back</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-inner">
+    <p class="hero-label">// practice projects</p>
+    <h1 class="hero-title">HTML <em>/</em> CSS</h1>
+    <p class="hero-sub">A collection of frontend practice projects built using pure HTML &amp; CSS — no frameworks, no shortcuts.</p>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="projects-section">
+  <div class="projects-inner">
+    <div class="projects-grid">
+
+      <!-- Project 1 -->
+      <div class="project-card">
+        <div class="card-img">
+          <img src="project-1-pic.png" alt="Little Lemmon Project"/>
+        </div>
+        <div class="card-body">
+          <div class="card-num">01</div>
+          <div class="card-title">Little Lemmon</div>
+          <p class="card-desc">A fully static restaurant landing page built with pure HTML &amp; CSS — no frameworks used.</p>
+          <span class="card-tag">HTML · CSS</span>
+          <div class="card-links">
+            <a href="https://github.com/saiprabhatca/Little-Leaf-Project-1" target="_blank" class="card-link">GitHub ↗</a>
+            <a href="https://saiprabhatca.github.io/Little-Leaf-Project-1/" target="_blank" class="card-link primary">Live Site ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 1.2 -->
+      <div class="project-card">
+        <div class="card-img">
+          <img src="project-1.2-pic.png" alt="Login Pages Project"/>
+        </div>
+        <div class="card-body">
+          <div class="card-num">02</div>
+          <div class="card-title">Login Pages</div>
+          <p class="card-desc">A modern-looking login page UI built with only HTML &amp; CSS — no backend or JavaScript.</p>
+          <span class="card-tag">HTML · CSS</span>
+          <div class="card-links">
+            <a href="https://github.com/saiprabhatca/Login-pageLL-Project-1.2" target="_blank" class="card-link">GitHub ↗</a>
+            <a href="https://saiprabhatca.github.io/Login-pageLL-Project-1.2/" target="_blank" class="card-link primary">Live Site ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card">
+        <div class="card-img">
+          <img src="project-2-pic.png" alt="The Shopping Site Project"/>
+        </div>
+        <div class="card-body">
+          <div class="card-num">03</div>
+          <div class="card-title">The Shopping Site</div>
+          <p class="card-desc">A shopping site UI built using HTML &amp; CSS — static frontend with no backend coding.</p>
+          <span class="card-tag">HTML · CSS</span>
+          <div class="card-links">
+            <a href="https://github.com/saiprabhatca/Project-2-The-shopping-site" target="_blank" class="card-link">GitHub ↗</a>
+            <a href="https://saiprabhatca.github.io/Project-2-The-shopping-site/" target="_blank" class="card-link primary">Live Site ↗</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- More coming -->
+    <div class="more-soon">
+      <span class="more-dot"></span>
+      Many more HTML/CSS practice projects are on the way...
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>Sai Prabhat C A · <span class="footer-tag">HTML/CSS</span> · Practice Projects</span>
+  <span>Built with intention ✦</span>
+</footer>
+
+</body>
+</html>

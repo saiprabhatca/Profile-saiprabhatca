@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hardware Projects — Coming Soon</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --border: rgba(255,255,255,0.07);
+    --accent: #d4ff47;
+    --text: #f0f0f0;
+    --muted: #666;
+    --side-pad: clamp(1rem, 5vw, 5rem);
+    --content-max: 860px;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: clamp(13px, 1.4vw, 15px);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem var(--side-pad);
+    background: rgba(10,10,10,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    letter-spacing: -0.5px;
+    cursor: pointer;
+  }
+  .logo span { color: var(--accent); }
+
+  .page-section {
+    width: 100%;
+    padding: clamp(4rem, 10vw, 7rem) var(--side-pad);
+  }
+  .inner {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .section-label {
+    font-size: clamp(10px, 1vw, 11px);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.05;
+    margin-bottom: 1.2rem;
+  }
+
+  .highlight {
+    color: var(--accent);
+  }
+
+  .coming-sub {
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 2.4rem;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2.2rem;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .hint {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 0.5rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 3rem;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+  }
+  .back-link span:first-child {
+    display: inline-block;
+    transform: translateY(1px);
+  }
+  .back-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  @media (max-width: 600px) {
+    :root { --side-pad: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo" onclick="window.location.href='index.html'">SP<span>.</span></div>
+</nav>
+
+<div class="page-section">
+  <div class="inner">
+    <p class="section-label">// hardware projects</p>
+    <div class="pill">
+      <span class="dot"></span>
+      <span>Coming soon</span>
+    </div>
+
+    <h1>Hardware projects<br/><span class="highlight">in progress.</span></h1>
+
+    <p class="coming-sub">
+      I’m currently working on embedded and electronics projects with Arduino and other microcontrollers.
+      This section will be updated soon with detailed write‑ups, circuit diagrams, and code.
+    </p>
+
+    <p class="hint">Check back here after my next build sprint — or reach out if you’d like to collaborate on a hardware idea.</p>
+
+    <a class="back-link" href="index.html">
+      <span>←</span>
+      <span>Back to main portfolio</span>
+    </a>
+  </div>
+</div>
+
+</body>
+</html>
+
